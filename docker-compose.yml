@@ -120,7 +120,7 @@ services:
       context: ./src/currencyservice
       args:
         - GRPC_VERSION=1.46.0
-        - OPENTELEMETRY_VERSION=1.4.0
+        - OPENTELEMETRY_VERSION=1.5.0
     ports:
       - "${CURRENCY_SERVICE_PORT}"
     environment:
@@ -255,6 +255,7 @@ services:
       - "${PRODUCT_CATALOG_SERVICE_PORT}"
     environment:
       - PRODUCT_CATALOG_SERVICE_PORT
+      - FEATURE_FLAG_GRPC_SERVICE_ADDR
       - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
       - OTEL_SERVICE_NAME=productcatalogservice
     depends_on:
