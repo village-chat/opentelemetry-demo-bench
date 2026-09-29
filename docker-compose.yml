@@ -15,14 +15,19 @@ services:
   jaeger:
     image: jaegertracing/all-in-one
     container_name: jaeger
+    command:
+      - "--memory.max-traces"
+      - "10000"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
     ports:
       - "16686:16686"                    # Jaeger UI
-      - "14250"                          # Jaeger model.proto endpoint
+      - "4317"                           # OTLP gRPC default port
     logging: *logging
 
   # Collector
   otelcol:
-    image: otel/opentelemetry-collector-contrib:0.56.0
+    image: otel/opentelemetry-collector-contrib:0.61.0
     container_name: otel-col
     command: [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-config-extras.yml" ]
     volumes:
@@ -329,6 +334,9 @@ services:
       - PRODUCT_CATALOG_SERVICE_ADDR
       - OTEL_PYTHON_LOG_CORRELATION=true
       - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+      # OTEL_EXPORTER_OTLP_METRICS_ENDPOINT # Not working for Python OTLP exporter
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
       - OTEL_SERVICE_NAME=recommendationservice
       - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
     logging: *logging
