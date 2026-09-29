@@ -1,4 +1,4 @@
-# OpenTelemetry Demo
+# ![otel-photo](./docs/img/opentelemetry-logo-nav.png) OpenTelemetry Demo
 
 [![Slack](https://img.shields.io/badge/slack-@cncf/otel/demo-brightgreen.svg?logo=slack)](https://cloud-native.slack.com/archives/C03B4CWV4DA)
 [![Version](https://img.shields.io/github/v/release/open-telemetry/opentelemetry-demo?color=blueviolet)](https://github.com/open-telemetry/opentelemetry-demo/releases)
@@ -39,16 +39,6 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 cd opentelemetry-demo/
 ```
 
-#### Gradle Update [Windows Only]
-
-- Navigate to the Java Ad Service folder to install and update Gradle:
-
-```shell
-cd .\src\adservice\
-.\gradlew installDist
-.\gradlew wrapper --gradle-version 7.4.2
-```
-
 #### Run Docker Compose
 
 - Start the demo (It can take ~20min the first time the command is executed as
@@ -63,12 +53,10 @@ docker compose up
 Once the images are built and containers are started you can access:
 
 - Webstore: <http://localhost:8080/>
-
 - Jaeger: <http://localhost:16686/>
-
 - Prometheus: <http://localhost:9090/>
-
 - Grafana: <http://localhost:3000/>
+- Feature Flags UI: <http://localhost:8081/>
 
 #### Bring your own backend
 
