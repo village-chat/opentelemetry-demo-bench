@@ -2,7 +2,89 @@
 
 ## Under Construction
 
-This repo is a work in progress
+This repo is a work in progress. If you'd like to help, check out our
+[contributing guidance](#contributing).
+
+## Local Quickstart
+
+### Pre-requisites
+
+- Docker
+- [Docker Compose](https://docs.docker.com/compose/install/#install-compose) v2.0.0+
+
+### Clone Repo
+
+- Clone the Webstore Demo repository:
+
+```shell
+git clone https://github.com/open-telemetry/opentelemetry-demo-webstore.git
+```
+
+### Open Folder
+
+- Navigate to the cloned folder:
+
+```shell
+cd opentelemetry-demo-webstore/
+```
+
+### Run Docker Compose
+
+- Start the demo (It can take ~20min the first time the command is executed as
+all the images will be build):
+
+```shell
+docker compose up
+```
+
+### Verify the Webstore & the Telemetry
+
+- Once the images are built you can access the Webstore at: <http://localhost:8080>
+
+- And the Jaeger UI at: <http://localhost:16686>
+
+### Bring your own backend
+
+Likely you want to use the Webstore as a demo application for an observability
+backend you already have (e.g. an existing instance of Jaeger, Zipkin or one of
+the [vendor of your choice](https://opentelemetry.io/vendors/).
+
+To add your backend open the file
+[src/otelcollector/otelccol-config.yml](./src/otelcollector/otelcol-config.yml)
+with an editor:
+
+- add a trace exporter for your backend. For example, if your backend supports
+  otlp, extend the `exporters` section like the following:
+
+```yaml
+exporters:
+  jaeger:
+    endpoint: "jaeger:14250"
+    insecure: true
+  logging:
+  otlp:
+    endpoint: <your-endpoint-url>
+```
+
+- add the `otlp` exporter to the `pipelines` section as well:
+
+```yaml
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, jaeger, otlp]
+```
+
+Vendor backends might require you to add additional parameters for
+authentication, please check their documentation. Some backends require
+different exporters, you may find them and their documentation available at
+[opentelemetry-collector-contrib/exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter).
+
+After updating the `otelcol-config.yml` start the demo by running
+`docker compose up`. After a while you should see the traces flowing into
+your backend as well.
 
 ## Screenshots from the Online Boutique
 
@@ -21,7 +103,6 @@ This repo is a work in progress
 **Online Boutique** is composed of 10 microservices written in different
 languages that talk to each other over gRPC. Plus one Load Generator which uses
 Locust to fake user traffic.
-See the [Development Principles](/docs/development-principles.md) doc for more information.
 
 ```mermaid
 
@@ -59,6 +140,8 @@ frontend --> recommendationservice --> productcatalogservice
 frontend --> shippingservice
 ```
 
+_To view a graph of the desired state of this application [click here](./docs/v1Graph.md)_
+
 Find **Protocol Buffers Descriptions** at the [`./pb` directory](./pb/README.md).
 
 | Service                                              | Language      | Description                                                                                                                       |
@@ -95,10 +178,6 @@ Find **Protocol Buffers Descriptions** at the [`./pb` directory](./pb/README.md)
   The application demo comes with a background job that creates realistic usage
   patterns on the website using [Locust](https://locust.io/) load generator.
 
-## Local Development
-
-TBD
-
 ## Demos featuring Online Boutique
 
 TBD
@@ -107,8 +186,8 @@ TBD
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-We meet weekly Monday's at 8:15 PT. The meeting is subject to change depending on
-contributors' availability. Check the [OpenTelemetry community
+We meet weekly Monday's at 8:15 AM PT. The meeting is subject to change
+depending on contributors' availability. Check the [OpenTelemetry community
 calendar](https://calendar.google.com/calendar/embed?src=google.com_b79e3e90j7bbsa2n2p5an5lf60%40group.calendar.google.com)
 for specific dates and Zoom meeting links.
 
