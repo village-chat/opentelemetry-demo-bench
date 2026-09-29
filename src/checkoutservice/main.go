@@ -19,13 +19,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/trace"
 	"net"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
+
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/trace"
 
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
@@ -36,18 +37,18 @@ import (
 
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/contrib/instrumentation/runtime"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
+	"go.opentelemetry.io/otel/metric/global"
 	"go.opentelemetry.io/otel/propagation"
+	sdkmetric "go.opentelemetry.io/otel/sdk/metric"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 
 	pb "github.com/open-telemetry/opentelemetry-demo/src/checkoutservice/genproto/hipstershop"
-	money "github.com/open-telemetry/opentelemetry-demo/src/checkoutservice/money"
+	"github.com/open-telemetry/opentelemetry-demo/src/checkoutservice/money"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
-)
-
-const (
-	usdCurrency = "USD"
 )
 
 var log *logrus.Logger
@@ -67,12 +68,12 @@ func init() {
 	log.Out = os.Stdout
 }
 
-func InitTracerProvider() *sdktrace.TracerProvider {
+func initTracerProvider() *sdktrace.TracerProvider {
 	ctx := context.Background()
 
 	exporter, err := otlptracegrpc.New(ctx)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("new otlp trace grpc exporter failed: %v", err)
 	}
 	tp := sdktrace.NewTracerProvider(
 		sdktrace.WithBatcher(exporter),
@@ -80,6 +81,19 @@ func InitTracerProvider() *sdktrace.TracerProvider {
 	otel.SetTracerProvider(tp)
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
 	return tp
+}
+
+func initMeterProvider() *sdkmetric.MeterProvider {
+	ctx := context.Background()
+
+	exporter, err := otlpmetricgrpc.New(ctx)
+	if err != nil {
+		log.Fatalf("new otlp metric grpc exporter failed: %v", err)
+	}
+
+	mp := sdkmetric.NewMeterProvider(sdkmetric.WithReader(sdkmetric.NewPeriodicReader(exporter)))
+	global.SetMeterProvider(mp)
+	return mp
 }
 
 type checkoutService struct {
@@ -96,12 +110,24 @@ func main() {
 	var port string
 	mustMapEnv(&port, "CHECKOUT_SERVICE_PORT")
 
-	tp := InitTracerProvider()
+	tp := initTracerProvider()
 	defer func() {
 		if err := tp.Shutdown(context.Background()); err != nil {
 			log.Printf("Error shutting down tracer provider: %v", err)
 		}
 	}()
+
+	mp := initMeterProvider()
+	defer func() {
+		if err := mp.Shutdown(context.Background()); err != nil {
+			log.Printf("Error shutting down meter provider: %v", err)
+		}
+	}()
+
+	err := runtime.Start(runtime.WithMinimumReadMemStatsInterval(time.Second))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	tracer = tp.Tracer("checkoutservice")
 
@@ -120,7 +146,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var srv *grpc.Server = grpc.NewServer(
+	var srv = grpc.NewServer(
 		grpc.UnaryInterceptor(otelgrpc.UnaryServerInterceptor()),
 		grpc.StreamInterceptor(otelgrpc.StreamServerInterceptor()),
 	)
@@ -187,7 +213,8 @@ func (cs *checkoutService) PlaceOrder(ctx context.Context, req *pb.PlaceOrderReq
 		return nil, status.Errorf(codes.Internal, "failed to charge card: %+v", err)
 	}
 	log.Infof("payment went through (transaction_id: %s)", txID)
-	span.AddEvent("charged", trace.WithAttributes(attribute.String("app.payment.transaction.id", txID)))
+	span.AddEvent("charged",
+		trace.WithAttributes(attribute.String("app.payment.transaction.id", txID)))
 
 	shippingTrackingID, err := cs.shipOrder(ctx, req.Address, prep.cartItems)
 	if err != nil {
@@ -211,10 +238,10 @@ func (cs *checkoutService) PlaceOrder(ctx context.Context, req *pb.PlaceOrderReq
 
 	span.SetAttributes(
 		attribute.String("app.order.id", orderID.String()),
-		shippingTrackingAttribute,
 		attribute.Float64("app.shipping.amount", shippingCostFloat),
 		attribute.Float64("app.order.amount", totalPriceFloat),
 		attribute.Int("app.order.items.count", len(prep.orderItems)),
+		shippingTrackingAttribute,
 	)
 
 	if err := cs.sendOrderConfirmation(ctx, req.Email, orderResult); err != nil {
