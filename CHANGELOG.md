@@ -78,8 +78,12 @@ the release.
   ([#1923](https://github.com/open-telemetry/opentelemetry-demo/pull/1923))
 * [chore] Add memory for frontend-proxy, kafka, grafana, opensearch
   ([#1931](https://github.com/open-telemetry/opentelemetry-demo/pull/1931))
+* [frontendproxy] fix Docker compose DNS resolver with envoy 1.32
+  ([#1936](https://github.com/open-telemetry/opentelemetry-demo/pull/1936))
 * [chore] Generate protobuf code for Typescript service - Frontend
   ([#1954](https://github.com/open-telemetry/opentelemetry-demo/pull/1954))
+* [accounting] bump OpenTelemetry .NET Automatic Instrumentation to 1.10.0
+  ([#1998](https://github.com/open-telemetry/opentelemetry-demo/pull/1998))
 
 ## 1.12.0
 

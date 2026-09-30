@@ -7,7 +7,7 @@ toolchain go1.22.9
 require (
 	github.com/open-feature/go-sdk v1.14.1
 	github.com/open-feature/go-sdk-contrib/hooks/open-telemetry v0.3.4
-	github.com/open-feature/go-sdk-contrib/providers/flagd v0.2.3
+	github.com/open-feature/go-sdk-contrib/providers/flagd v0.2.4
 	github.com/sirupsen/logrus v1.9.3
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.59.0
 	go.opentelemetry.io/contrib/instrumentation/runtime v0.59.0
@@ -19,7 +19,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.34.0
 	google.golang.org/grpc v1.70.0
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.5.1
-	google.golang.org/protobuf v1.36.4
+	google.golang.org/protobuf v1.36.5
 )
 
 require (
