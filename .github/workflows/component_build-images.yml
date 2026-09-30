@@ -61,7 +61,7 @@ jobs:
             setup-qemu: true
           - file: ./src/emailservice/Dockerfile
             tag_suffix: emailservice
-            context: ./src/emailservice
+            context: ./
             setup-qemu: true
           - file: ./src/frauddetectionservice/Dockerfile
             tag_suffix: frauddetectionservice
@@ -157,12 +157,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          config-inline: |
+          buildkitd-config-inline: |
             [worker.oci]
             max-parallelism = 2
       - name: Matrix Build and push demo images
         if: steps.check_changes.outputs.skip == 'false'
-        uses: docker/build-push-action@v5.0.0
+        uses: docker/build-push-action@v6.1.0
         with:
           context: ${{ matrix.file_tag.context }}
           file: ${{ matrix.file_tag.file }}

@@ -7,6 +7,13 @@ the release.
 
 ## Unreleased
 
+* [cartservice] bump .NET package to 1.9.0 release
+  ([#1610](https://github.com/open-telemetry/opentelemetry-demo/pull/1610))
+* [Valkey] Replace Redis with Valkey
+  ([#1619](https://github.com/open-telemetry/opentelemetry-demo/pull/1619))
+
+## 1.10.0
+
 * [frauddetectionservice] use span links when consuming from Kafka
   ([#1501](https://github.com/open-telemetry/opentelemetry-demo/pull/1501))
 * [frontend] reunite trace from loadgenerator
@@ -38,13 +45,18 @@ the release.
 * [frontend] Fix imageloading issues on optimized images. bump next.js version
   ([#1571](https://github.com/open-telemetry/opentelemetry-demo/pull/1571))
 * [cartservice] bump .NET package to 1.8.1 release
-  ([#1514](https://github.com/open-telemetry/opentelemetry-demo/pull/1514)), ([#1580](https://github.com/open-telemetry/opentelemetry-demo/pull/1580))
+  ([#1514](https://github.com/open-telemetry/opentelemetry-demo/pull/1514),
+   [#1580](https://github.com/open-telemetry/opentelemetry-demo/pull/1580))
 * [kafka] Fix permission issue with the telemetry agent when running in docker compose
   ([#1574](https://github.com/open-telemetry/opentelemetry-demo/pull/1574))
 * [flagd] Add flagd service to minimal docker compose deployment
   ([#1585](https://github.com/open-telemetry/opentelemetry-demo/pull/1585))
 * [kafka] Increase memory and Java heap limits
   ([#1592](https://github.com/open-telemetry/opentelemetry-demo/pull/1592))
+* chore: Add service version to OTEL_RESOURCE_ATTRIBUTES
+  ([#1594](https://github.com/open-telemetry/opentelemetry-demo/pull/1594))
+* [checkout] increase Kafka resiliency and observability
+  ([#1590](https://github.com/open-telemetry/opentelemetry-demo/pull/1590))
 
 ## 1.9.0
 
