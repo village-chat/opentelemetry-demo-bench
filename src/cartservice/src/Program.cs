@@ -3,6 +3,7 @@
 using System;
 
 using cartservice.cartstore;
+using cartservice.featureflags;
 using cartservice.services;
 
 using Microsoft.AspNetCore.Builder;
@@ -17,31 +18,29 @@ using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 string redisAddress = builder.Configuration["REDIS_ADDR"];
-RedisCartStore cartStore = null;
 if (string.IsNullOrEmpty(redisAddress))
 {
     Console.WriteLine("REDIS_ADDR environment variable is required.");
     Environment.Exit(1);
 }
-cartStore = new RedisCartStore(redisAddress);
+var cartStore = new RedisCartStore(redisAddress);
 
 // Initialize the redis store
 await cartStore.InitializeAsync();
 Console.WriteLine("Initialization completed");
 
 builder.Services.AddSingleton<ICartStore>(cartStore);
+builder.Services.AddSingleton<FeatureFlagHelper>();
 
 // see https://opentelemetry.io/docs/instrumentation/net/getting-started/
 
 Action<ResourceBuilder> appResourceBuilder =
     resource => resource
-        .AddTelemetrySdk()
-        .AddEnvironmentVariableDetector()
         .AddDetector(new ContainerResourceDetector());
 
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(appResourceBuilder)
-    .WithTracing(builder => builder
+    .WithTracing(tracerBuilder => tracerBuilder
         .AddRedisInstrumentation(
             cartStore.GetConnection(),
             options => options.SetVerboseDatabaseStatements = true)
@@ -49,7 +48,7 @@ builder.Services.AddOpenTelemetry()
         .AddGrpcClientInstrumentation()
         .AddHttpClientInstrumentation()
         .AddOtlpExporter())
-    .WithMetrics(builder => builder
+    .WithMetrics(meterBuilder => meterBuilder
         .AddRuntimeInstrumentation()
         .AddAspNetCoreInstrumentation()
         .AddOtlpExporter());
