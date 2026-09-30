@@ -49,6 +49,10 @@ release.
   ([#872](https://github.com/open-telemetry/opentelemetry-demo/pull/872))
 * [frontendproxy]Envoy expose a route for the collector to route frontend spans
   ([#938](https://github.com/open-telemetry/opentelemetry-demo/pull/938))
+* [shippingservice] Update Rust dependencies and add TelemetryResourceDetector
+  ([#972](https://github.com/open-telemetry/opentelemetry-demo/pull/972))
+* Update frontendproxy's env for minimal
+  ([#983](https://github.com/open-telemetry/opentelemetry-demo/pull/983))
 
 ## 1.4.0
 
