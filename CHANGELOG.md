@@ -7,6 +7,10 @@ the release.
 
 ## Unreleased
 
+* [featureflag] deprecate in favor of flagd
+  ([#1338](https://github.com/open-telemetry/opentelemetry-demo/pull/1388))
+* [checkoutservice] add producer interceptor for tracing
+  ([#1400](https://github.com/open-telemetry/opentelemetry-demo/pull/1400))
 * [chore] increase memory for Collector and Jaeger
   ([#1396](https://github.com/open-telemetry/opentelemetry-demo/pull/1396))
 * [chore] fix Make targets for restart and redeploy
@@ -21,6 +25,12 @@ the release.
   ([#1406](https://github.com/open-telemetry/opentelemetry-demo/pull/1406))
 * [CartService] - Add Host Detector
   ([#1415](https://github.com/open-telemetry/opentelemetry-demo/pull/1415))
+* [chore] - add tests and odd profiles to make stop
+  ([#1427](https://github.com/open-telemetry/opentelemetry-demo/pull/1427))
+* [chore] - Update Telemetry Components
+  ([#1440](https://github.com/open-telemetry/opentelemetry-demo/pull/1440))
+* [Frontend-proxy] Add restart policy to compose file
+  ([#1448](https://github.com/open-telemetry/opentelemetry-demo/pull/1448))
 
 ## 1.8.0
 
