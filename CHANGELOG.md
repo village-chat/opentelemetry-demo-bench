@@ -21,6 +21,17 @@ the release.
   ([#1786](https://github.com/open-telemetry/opentelemetry-demo/pull/1786))
 * [chore] Add multi-platform build support
   ([#1785](https://github.com/open-telemetry/opentelemetry-demo/pull/1785))
+* [chore] Generate protobuf code for Go and Python services
+  ([#1794](https://github.com/open-telemetry/opentelemetry-demo/pull/1784))
+* [paymentservice] Add nodejs instrumentation for runtime metrics
+  ([#1797](https://github.com/open-telemetry/opentelemetry-demo/pull/1797))
+* [flagd and paymentservice] Update `paymentServiceFailure` to use a list of
+  variants and add loyalty level attributes to spans. Added `service.name` to logs.
+  ([#1815](https://github.com/open-telemetry/opentelemetry-demo/pull/1815))
+* [accounting] rename accountingservice to accounting
+  ([#1827](https://github.com/open-telemetry/opentelemetry-demo/pull/1827))
+* [cartservice] - Add Exemplars to Cart Service
+  ([#1830](https://github.com/open-telemetry/opentelemetry-demo/pull/1830))
 
 ## 1.12.0
 

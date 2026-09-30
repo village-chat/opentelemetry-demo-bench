@@ -38,13 +38,15 @@
     ],
     "ignore": [
         "node_modules/",
-        "src/accountingservice/genproto/",
+        "/src/accounting/src/protos/",
         "src/cartservice/src/obj/",
         "src/cartservice/tests/obj/",
         "src/checkoutservice/genproto/",
         "src/featureflagservice/assets/vendor/",
         "src/featureflagservice/priv/",
         "src/productcatalogservice/genproto/",
+        "src/recommendationservice/demo_pb2.py",
+        "src/recommendationservice/demo_pb2_grpc.py",
         "internal/tools/"
     ]
   }
