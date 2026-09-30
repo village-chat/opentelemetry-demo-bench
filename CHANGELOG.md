@@ -35,6 +35,8 @@ release.
   ([#819](https://github.com/open-telemetry/opentelemetry-demo/pull/819))
 * Moved env platform flag to the footer, changed it to free text
   ([#818](https://github.com/open-telemetry/opentelemetry-demo/pull/818))
+* Update OTel Collector
+  ([#822](https://github.com/open-telemetry/opentelemetry-demo/pull/822))
 
 ## v0.1.0
 
@@ -297,3 +299,5 @@ significant modifications will be credited to OpenTelemetry Authors.
   ([#764](https://github.com/open-telemetry/opentelemetry-demo/pull/764))
 * [chore] align memory limits with Helm chart
   ([#781](https://github.com/open-telemetry/opentelemetry-demo/pull/781))
+* Use an async PHP runtime, bump versions to latest betas
+  ([#823](https://github.com/open-telemetry/opentelemetry-demo/pull/823))
