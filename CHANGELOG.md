@@ -25,6 +25,16 @@ the release.
   ([#1528](https://github.com/open-telemetry/opentelemetry-demo/pull/1528))
 * [otelcollector] Add `redisreceiver`
   ([#1537](https://github.com/open-telemetry/opentelemetry-demo/pull/1537))
+* [traceBasedTests] update to v1.0.0
+  ([#1551](https://github.com/open-telemetry/opentelemetry-demo/pull/1551))
+* [flagd] update to 0.10.1 and set 50M memory limit
+  ([#1554](https://github.com/open-telemetry/opentelemetry-demo/pull/1554))
+* [loadgenerator] Configure feature flag evaluation tracing
+  ([#1553](https://github.com/open-telemetry/opentelemetry-demo/pull/1553))
+* [recommendationservice] Configure feature flag evaluation tracing
+  ([#1553](https://github.com/open-telemetry/opentelemetry-demo/pull/1553))
+* [loadgenerator] Fix feature flag hooks setter method
+  ([#1556](https://github.com/open-telemetry/opentelemetry-demo/pull/1556))
 
 ## 1.9.0
 
