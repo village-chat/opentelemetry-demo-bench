@@ -15,10 +15,12 @@ defmodule FlagdUi.MixProject do
       deps: deps(),
       releases: [
         flagd_ui: [
-          applications: [opentelemetry: :temporary]
+          applications: [
+            opentelemetry_exporter: :permanent,
+            opentelemetry: :temporary
+          ]
         ]
-      ],
-      listeners: [Phoenix.CodeReloader]
+      ]
     ]
   end
 
@@ -28,7 +30,7 @@ defmodule FlagdUi.MixProject do
   def application do
     [
       mod: {FlagdUi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon, :inets]
     ]
   end
 
