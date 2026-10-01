@@ -1,9 +1,10 @@
 
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.google.protobuf.gradle.*
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "2.1.21"
+    kotlin("jvm") version "2.2.0"
     application
     id("java")
     id("idea")
@@ -31,7 +32,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(kotlin("script-runtime"))
     implementation("org.apache.kafka:kafka-clients:4.0.0")
-    implementation("com.google.api.grpc:proto-google-common-protos:2.58.2")
+    implementation("com.google.api.grpc:proto-google-common-protos:2.59.0")
     implementation("io.grpc:grpc-protobuf:${grpcVersion}")
     implementation("io.grpc:grpc-stub:${grpcVersion}")
     implementation("io.grpc:grpc-netty:${grpcVersion}")
@@ -43,7 +44,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.17")
     implementation("com.google.protobuf:protobuf-kotlin:${protobufVersion}")
     implementation("dev.openfeature:sdk:1.15.1")
-    implementation("dev.openfeature.contrib.providers:flagd:0.11.10")
+    implementation("dev.openfeature.contrib.providers:flagd:0.11.11")
 
     if (JavaVersion.current().isJava9Compatible) {
         // Workaround for @javax.annotation.Generated
@@ -62,8 +63,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+kotlin {
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_17)
+  }
 }
 
 protobuf {
