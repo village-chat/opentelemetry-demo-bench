@@ -7,8 +7,22 @@ the release.
 
 ## Unreleased
 
+## 2.1.3
+
+* [chore] Fix postgresql container
+  ([#2597](https://github.com/open-telemetry/opentelemetry-demo/pull/2597))
+
+## 2.1.2
+
+* [chore] add postgresql and opensearch containers to build workflow
+  ([#2595](https://github.com/open-telemetry/opentelemetry-demo/pull/2595))
+
+## 2.1.1
+
 * Align env vars
   ([#2582](https://github.com/open-telemetry/opentelemetry-demo/pull/2582))
+* [opensearch] Reduce OpenSearch container memory footprint
+  ([#2587](https://github.com/open-telemetry/opentelemetry-demo/pull/2587))
 
 ## 2.1.0
 
