@@ -89,9 +89,13 @@ the release.
   ([#2402](https://github.com/open-telemetry/opentelemetry-demo/pull/2402))
 * [prometheus /grafana] Add alerting demo through the `CartAddItemHighLatency`
   alert rule
-  [#2401](https://github.com/open-telemetry/opentelemetry-demo/pull/2401)
+  ([#2401](https://github.com/open-telemetry/opentelemetry-demo/pull/2401))
+* [chore] Bump dependent images
+  ([#2477](https://github.com/open-telemetry/opentelemetry-demo/pull/2477))
 * [prometheus / grafana] Add Linux monitoring dashboard
-  [#2395](https://github.com/open-telemetry/opentelemetry-demo/pull/2395)
+  ([#2395](https://github.com/open-telemetry/opentelemetry-demo/pull/2395))
+* [email] Add memory leak scenario to email service
+  ([#2481](https://github.com/open-telemetry/opentelemetry-demo/pull/2481))
 
 ## 2.0.2
 
