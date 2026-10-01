@@ -58,18 +58,18 @@ keeping it up to date for you.
 
 |                           |                |                                  |
 |---------------------------|----------------|----------------------------------|
-| [AlibabaCloud LogService] | [Google Cloud] | [Parseable]                      |
-| [AppDynamics]             | [Grafana Labs] | [Sentry]                         |
-| [Aspecto]                 | [Guance]       | [ServiceNow Cloud Observability] |
-| [Axiom]                   | [Honeycomb.io] | [SigNoz]                         |
-| [Axoflow]                 | [Instana]      | [Splunk]                         |
-| [Azure Data Explorer]     | [Kloudfuse]    | [Sumo Logic]                     |
-| [Causely]                 | [Last9]        | [TelemetryHub]                   |
+| [AlibabaCloud LogService] | [Dynatrace]    | [OpenSearch]                     |
+| [Apache Doris]            | [Elastic]      | [Oracle]                         |
+| [AppDynamics]             | [Google Cloud] | [Parseable]                      |
+| [Aspecto]                 | [Grafana Labs] | [Sentry]                         |
+| [Axiom]                   | [Guance]       | [ServiceNow Cloud Observability] |
+| [Axoflow]                 | [Honeycomb.io] | [SigNoz]                         |
+| [Azure Data Explorer]     | [Instana]      | [Splunk]                         |
+| [Causely]                 | [Kloudfuse]    | [Sumo Logic]                     |
+| [ClickStack]              | [Last9]        | [TelemetryHub]                   |
 | [Coralogix]               | [Liatrio]      | [Teletrace]                      |
 | [Dash0]                   | [Logz.io]      | [Tracetest]                      |
 | [Datadog]                 | [New Relic]    | [Uptrace]                        |
-| [Dynatrace]               | [OpenSearch]   |                                  |
-| [Elastic]                 | [Oracle]       |                                  |
 
 ## Contributing
 
@@ -115,11 +115,13 @@ For more information about the emeritus role, see the [community repository](htt
 
 [AlibabaCloud LogService]: https://github.com/aliyun-sls/opentelemetry-demo
 [AppDynamics]: https://community.splunk.com/t5/AppDynamics-Knowledge-Base/How-to-observe-Kubernetes-deployment-of-OpenTelemetry-demo-app/ta-p/741454
+[Apache Doris]: https://github.com/apache/doris-opentelemetry-demo
 [Aspecto]: https://github.com/aspecto-io/opentelemetry-demo
 [Axiom]: https://play.axiom.co/axiom-play-qf1k/dashboards/otel.traces.otel-demo-traces
 [Axoflow]: https://axoflow.com/opentelemetry-support-in-more-detail-in-axosyslog-and-syslog-ng/
 [Azure Data Explorer]: https://github.com/Azure/Azure-kusto-opentelemetry-demo
 [Causely]: https://github.com/causely-oss/otel-demo
+[ClickStack]: https://github.com/ClickHouse/opentelemetry-demo
 [Coralogix]: https://coralogix.com/blog/configure-otel-demo-send-telemetry-data-coralogix
 [Dash0]: https://github.com/dash0hq/opentelemetry-demo
 [Datadog]: https://docs.datadoghq.com/opentelemetry/guide/otel_demo_to_datadog
